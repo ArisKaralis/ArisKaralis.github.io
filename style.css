@@ -28,3 +28,118 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Navigation Bar Styles */
+nav ul {
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0;
+    margin: 0; /* Add this if your header has its own padding for the h1 */
+    text-align: center; /* Centers the navigation links */
+    background-color: #444; /* Darker background for the nav bar itself */
+    overflow: hidden; /* Clear floats if you were to use them, good practice */
+}
+
+nav ul li {
+    display: inline-block; /* Makes list items appear side-by-side */
+}
+
+nav ul li a {
+    display: block; /* Makes the entire area of li clickable */
+    color: white;
+    text-align: center;
+    padding: 14px 16px; /* Adds some space around the links */
+    text-decoration: none; /* Removes the default underline from links */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+nav ul li a:hover {
+    background-color: #555; /* Slightly lighter background on hover */
+    color: #ddd; /* Slightly lighter text on hover */
+}
+
+/* Style for the active page link (optional, but good for UX) */
+nav ul li a.active {
+    background-color: #007bff; /* A distinct color for the active page */
+    color: white;
+}
+
+/* Adjust header h1 if nav is inside it and you want them on same line or styled differently */
+header h1 {
+    /* If you want h1 and nav on the same visual line, you might need flexbox on the header */
+    /* For now, keeping them stacked is simpler with current CSS */
+    margin-bottom: 0; /* Remove space below h1 if nav is directly after */
+}
+
+/* General main content styling update */
+main {
+    padding: 20px;
+    /* Removed text-align: center from main to allow more natural content flow */
+    /* You can add it back or apply to specific elements if needed */
+    max-width: 900px; /* Constrain width for better readability on wide screens */
+    margin: 20px auto; /* Center the main content area */
+    background-color: #fff; /* White background for content area */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    min-height: calc(100vh - 200px); /* Approximate minimum height to push footer down, adjust 200px based on header/footer height */
+}
+
+/* ... (your existing styles and new nav styles) ... */
+
+/* Button style for links */
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Basic Project Card Styling */
+.project-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to next line */
+    gap: 20px; /* Space between cards */
+    justify-content: center; /* Center cards if they don't fill the row */
+}
+
+.project-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(50% - 40px); /* Two cards per row, considering gap and padding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px; /* If not using gap or for single column on small screens */
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Responsive: one card per row on smaller screens */
+@media (max-width: 768px) {
+    .project-card {
+        width: calc(100% - 40px); /* Full width minus padding */
+    }
+}
+
+/* Experience Item Styling (optional, very basic) */
+.experience-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.experience-item h3 {
+    margin-top: 0;
+}
