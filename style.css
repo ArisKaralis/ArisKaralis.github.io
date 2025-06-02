@@ -1,74 +1,144 @@
+/* :root defines variables for the default (light) theme */
+:root {
+    --background-color: #f4f4f4;
+    --secondary-background-color: #ffffff; /* For content areas like main */
+    --card-background-color: #f9f9f9;
+    --text-color: #333333;
+    --heading-color: #222222;
+    --border-color: #dddddd;
+
+    /* Blue accent palette */
+    --primary-accent-color: #007bff;    /* A nice, standard blue */
+    --primary-accent-hover-color: #0056b3; /* Darker blue for hover */
+    --primary-accent-text-color: #ffffff; /* Text color for on top of primary accent */
+
+    /* Navigation specific */
+    --nav-background-color: #004a99; /* Darker blue for nav */
+    --nav-text-color: #ffffff;
+    --nav-hover-background-color: #003366; /* Even darker blue for nav hover */
+    --nav-active-background-color: var(--primary-accent-color); /* Use main accent blue for active */
+
+    /* Footer specific */
+    --footer-background-color: #2c3e50; /* A dark slate/blue */
+    --footer-text-color: #ecf0f1;
+
+    /* Button specific (can reuse primary accent) */
+    --button-background-color: var(--primary-accent-color);
+    --button-text-color: var(--primary-accent-text-color);
+    --button-hover-background-color: var(--primary-accent-hover-color);
+}
+
+/* Define overrides for the dark theme */
+html[data-theme='dark'] {
+    --background-color: #121212; /* Very dark grey, almost black */
+    --secondary-background-color: #1e1e1e; /* Slightly lighter dark for content areas */
+    --card-background-color: #2a2a2a;
+    --text-color: #e0e0e0; /* Light grey text */
+    --heading-color: #f5f5f5; /* Even lighter for headings */
+    --border-color: #444444;
+
+    /* Blue accent palette for dark mode - often a bit lighter/brighter */
+    --primary-accent-color: #36a6ff;
+    --primary-accent-hover-color: #007bff;
+    --primary-accent-text-color: #121212; /* Dark text on lighter blue buttons */
+
+    /* Navigation specific for dark mode */
+    --nav-background-color: #0d2c4a; /* Dark, desaturated blue */
+    --nav-text-color: #e0e0e0;
+    --nav-hover-background-color: #113b63;
+    --nav-active-background-color: var(--primary-accent-color);
+
+    /* Footer specific for dark mode */
+    --footer-background-color: #17202a;
+    --footer-text-color: #bdc3c7;
+
+    /* Button specific for dark mode */
+    --button-background-color: var(--primary-accent-color);
+    --button-text-color: var(--primary-accent-text-color);
+    --button-hover-background-color: var(--primary-accent-hover-color);
+}
+
+/* Apply a smooth transition to color changes */
+body, header, nav, main, footer, .project-card, .experience-item, .button {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
 body {
     font-family: sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--background-color); /* USE VARIABLE */
+    color: var(--text-color); /* USE VARIABLE */
 }
 
 header {
-    background: #333;
-    color: #fff;
+    background: var(--nav-background-color); /* Changed to nav background for consistency */
+    color: var(--nav-text-color); /* USE VARIABLE */
     padding: 1rem 0;
     text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0;
+    color: var(--nav-text-color); /* Ensure heading color matches */
 }
 
 main {
     padding: 20px;
-    text-align: center;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: var(--secondary-background-color); /* USE VARIABLE */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Shadow might need adjustment for dark mode, or use a variable */
+    min-height: calc(100vh - 200px);
+    border: 1px solid var(--border-color); /* Added border */
+    border-radius: 8px; /* Optional rounding */
 }
+
+main h2, main h3, main h4 {
+    color: var(--heading-color); /* USE VARIABLE for headings */
+}
+
 
 footer {
     text-align: center;
-    padding: 1rem 0;
-    background: #333;
-    color: #fff;
-    position: fixed; /* Just for basic example, you might change this */
-    bottom: 0;
-    width: 100%;
+    padding: 1.5rem 0; /* Increased padding a bit */
+    background: var(--footer-background-color); /* USE VARIABLE */
+    color: var(--footer-text-color); /* USE VARIABLE */
+    /* position: fixed; was removed for better scrolling with main's min-height */
+    /* bottom: 0; */
+    /* width: 100%; */
+    margin-top: 30px; /* Add some space above the footer */
 }
 
-/* Navigation Bar Styles */
 nav ul {
-    list-style-type: none; /* Removes default bullet points */
+    list-style-type: none;
     padding: 0;
-    margin: 0; /* Add this if your header has its own padding for the h1 */
-    text-align: center; /* Centers the navigation links */
-    background-color: #444; /* Darker background for the nav bar itself */
-    overflow: hidden; /* Clear floats if you were to use them, good practice */
-}
-
-nav ul li {
-    display: inline-block; /* Makes list items appear side-by-side */
+    margin: 0;
+    text-align: center;
+    background-color: var(--nav-background-color); /* USE VARIABLE */
+    overflow: hidden;
 }
 
 nav ul li a {
-    display: block; /* Makes the entire area of li clickable */
-    color: white;
+    display: block;
+    color: var(--nav-text-color); /* USE VARIABLE */
     text-align: center;
-    padding: 14px 16px; /* Adds some space around the links */
-    text-decoration: none; /* Removes the default underline from links */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: #555; /* Slightly lighter background on hover */
-    color: #ddd; /* Slightly lighter text on hover */
+    background-color: var(--nav-hover-background-color); /* USE VARIABLE */
+    color: var(--nav-text-color); /* Or a slightly different hover text color if defined */
 }
 
-/* Style for the active page link (optional, but good for UX) */
 nav ul li a.active {
-    background-color: #007bff; /* A distinct color for the active page */
-    color: white;
+    background-color: var(--nav-active-background-color); /* USE VARIABLE */
+    color: var(--primary-accent-text-color); /* USE VARIABLE */
 }
 
-/* Adjust header h1 if nav is inside it and you want them on same line or styled differently */
-header h1 {
-    /* If you want h1 and nav on the same visual line, you might need flexbox on the header */
-    /* For now, keeping them stacked is simpler with current CSS */
-    margin-bottom: 0; /* Remove space below h1 if nav is directly after */
-}
+
 
 /* General main content styling update */
 main {
@@ -88,40 +158,42 @@ main {
 .button {
     display: inline-block;
     padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--button-background-color); /* USE VARIABLE */
+    color: var(--button-text-color); /* USE VARIABLE */
     text-decoration: none;
     border-radius: 5px;
     margin-top: 10px;
     margin-right: 10px;
     transition: background-color 0.3s ease;
+    border: none; /* Remove default border if any */
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-background-color); /* USE VARIABLE */
 }
 
-/* Basic Project Card Styling */
+.project-card, .experience-item { /* Combined for similar styling */
+    background-color: var(--card-background-color); /* USE VARIABLE */
+    border: 1px solid var(--border-color); /* USE VARIABLE */
+    border-radius: 8px;
+    padding: 20px; /* Increased padding a bit for cards */
+    /* width, box-shadow, margin-bottom, etc. as before */
+    /* ... keep your existing layout styles like flex, gap, width for .project-grid and .project-card ... */
+}
 .project-grid {
     display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap to next line */
-    gap: 20px; /* Space between cards */
-    justify-content: center; /* Center cards if they don't fill the row */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
-
 .project-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: calc(50% - 40px); /* Two cards per row, considering gap and padding */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 20px; /* If not using gap or for single column on small screens */
+     width: calc(50% - 40px); /* Adjust as needed for responsiveness and gap */
+     box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* This shadow is subtle, might be okay for dark too */
+     margin-bottom: 20px;
 }
-
-.project-card h3 {
+.project-card h3, .experience-item h3 {
     margin-top: 0;
-    color: #333;
+    color: var(--heading-color); /* USE VARIABLE */
 }
 
 /* Responsive: one card per row on smaller screens */
