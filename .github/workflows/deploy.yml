@@ -1,0 +1,4 @@
+on: # --------------------------------------------------------------------> 2. Trigger Event
+  push:
+    branches:
+      - main  # Or master, if that's your default branch
