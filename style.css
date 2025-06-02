@@ -1,217 +1,523 @@
-/* :root defines variables for the default (light) theme */
-:root {
-    --background-color: #f4f4f4;
-    --secondary-background-color: #ffffff; /* For content areas like main */
-    --card-background-color: #f9f9f9;
-    --text-color: #333333;
-    --heading-color: #222222;
-    --border-color: #dddddd;
-
-    /* Blue accent palette */
-    --primary-accent-color: #007bff;    /* A nice, standard blue */
-    --primary-accent-hover-color: #0056b3; /* Darker blue for hover */
-    --primary-accent-text-color: #ffffff; /* Text color for on top of primary accent */
-
-    /* Navigation specific */
-    --nav-background-color: #004a99; /* Darker blue for nav */
-    --nav-text-color: #ffffff;
-    --nav-hover-background-color: #003366; /* Even darker blue for nav hover */
-    --nav-active-background-color: var(--primary-accent-color); /* Use main accent blue for active */
-
-    /* Footer specific */
-    --footer-background-color: #2c3e50; /* A dark slate/blue */
-    --footer-text-color: #ecf0f1;
-
-    /* Button specific (can reuse primary accent) */
-    --button-background-color: var(--primary-accent-color);
-    --button-text-color: var(--primary-accent-text-color);
-    --button-hover-background-color: var(--primary-accent-hover-color);
+/* --- Global Resets and Font --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-
-/* Define overrides for the dark theme */
-html[data-theme='dark'] {
-    --background-color: #121212; /* Very dark grey, almost black */
-    --secondary-background-color: #1e1e1e; /* Slightly lighter dark for content areas */
-    --card-background-color: #2a2a2a;
-    --text-color: #e0e0e0; /* Light grey text */
-    --heading-color: #f5f5f5; /* Even lighter for headings */
-    --border-color: #444444;
-
-    /* Blue accent palette for dark mode - often a bit lighter/brighter */
-    --primary-accent-color: #36a6ff;
-    --primary-accent-hover-color: #007bff;
-    --primary-accent-text-color: #121212; /* Dark text on lighter blue buttons */
-
-    /* Navigation specific for dark mode */
-    --nav-background-color: #0d2c4a; /* Dark, desaturated blue */
-    --nav-text-color: #e0e0e0;
-    --nav-hover-background-color: #113b63;
-    --nav-active-background-color: var(--primary-accent-color);
-
-    /* Footer specific for dark mode */
-    --footer-background-color: #17202a;
-    --footer-text-color: #bdc3c7;
-
-    /* Button specific for dark mode */
-    --button-background-color: var(--primary-accent-color);
-    --button-text-color: var(--primary-accent-text-color);
-    --button-hover-background-color: var(--primary-accent-hover-color);
-}
-
-/* Apply a smooth transition to color changes */
-body, header, nav, main, footer, .project-card, .experience-item, .button {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color); /* USE VARIABLE */
-    color: var(--text-color); /* USE VARIABLE */
+    font-size: 16px; /* Base font size */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header {
-    background: var(--nav-background-color); /* Changed to nav background for consistency */
-    color: var(--nav-text-color); /* USE VARIABLE */
-    padding: 1rem 0;
-    text-align: center;
+/* --- CSS Custom Properties (Variables) --- */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #f8f9fa;          /* Overall page background */
+    --bg-sidebar: #eef2f9;        /* Sidebar background */
+    --bg-content: #ffffff;        /* Main content area background */
+    --bg-card: #ffffff;           /* Card backgrounds */
+    --bg-modal: #ffffff;
+    --bg-button: #1a73e8;         /* Primary button blue */
+    --bg-button-hover: #1558b0;
+    --bg-theme-button: #e8f0fe;   /* Lighter blue for theme button */
+    --bg-theme-button-hover: #d2e3fc;
+    --bg-input: #ffffff;
+
+    --text-primary: #202124;      /* Main text color */
+    --text-secondary: #5f6368;    /* Lighter text for meta, descriptions */
+    --text-headings: #121212;
+    --text-on-accent: #ffffff;    /* Text on primary buttons */
+    --text-link: #1a73e8;
+    --text-link-hover: #1558b0;
+    --text-sidebar-link: #3c4043;
+    --text-sidebar-link-active: #1967d2;
+    --text-sidebar-title: #202124;
+
+    --border-primary: #dadce0;    /* Standard border */
+    --border-input: #80868b;
+    --border-input-focus: #1a73e8;
+
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --shadow-modal: 0 4px 23px 0 rgba(0,0,0,0.2);
+
+    --sidebar-width: 260px;
+    --icon-color: #5f6368;
+    --icon-color-active: #1967d2;
 }
 
-header h1 {
-    margin-bottom: 0;
-    color: var(--nav-text-color); /* Ensure heading color matches */
+html[data-theme='dark'] {
+    --bg-primary: #171717;        /* Dark page background */
+    --bg-sidebar: #202124;      /* Dark sidebar */
+    --bg-content: #282a2d;      /* Dark content area */
+    --bg-card: #303134;         /* Dark card backgrounds */
+    --bg-modal: #3c4043;
+    --bg-button: #8ab4f8;       /* Lighter blue for dark mode buttons */
+    --bg-button-hover: #aecbfa;
+    --bg-theme-button: #283142; /* Darker blue for theme button */
+    --bg-theme-button-hover: #3c4f76;
+    --bg-input: #3c4043;
+
+    --text-primary: #e8eaed;    /* Light text for dark mode */
+    --text-secondary: #bdc1c6;
+    --text-headings: #f1f3f4;
+    --text-on-accent: #202124;  /* Dark text on light blue buttons */
+    --text-link: #8ab4f8;
+    --text-link-hover: #aecbfa;
+    --text-sidebar-link: #bdc1c6;
+    --text-sidebar-link-active: #8ab4f8;
+    --text-sidebar-title: #e8eaed;
+
+    --border-primary: #5f6368;  /* Lighter border for dark mode */
+    --border-input: #9aa0a6;
+    --border-input-focus: #8ab4f8;
+
+    --icon-color: #9aa0a6;
+    --icon-color-active: #8ab4f8;
 }
 
-main {
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: var(--secondary-background-color); /* USE VARIABLE */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Shadow might need adjustment for dark mode, or use a variable */
-    min-height: calc(100vh - 200px);
-    border: 1px solid var(--border-color); /* Added border */
-    border-radius: 8px; /* Optional rounding */
+/* Apply theme variables */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
-main h2, main h3, main h4 {
-    color: var(--heading-color); /* USE VARIABLE for headings */
-}
-
-
-footer {
-    text-align: center;
-    padding: 1.5rem 0; /* Increased padding a bit */
-    background: var(--footer-background-color); /* USE VARIABLE */
-    color: var(--footer-text-color); /* USE VARIABLE */
-    /* position: fixed; was removed for better scrolling with main's min-height */
-    /* bottom: 0; */
-    /* width: 100%; */
-    margin-top: 30px; /* Add some space above the footer */
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    background-color: var(--nav-background-color); /* USE VARIABLE */
-    overflow: hidden;
-}
-
-nav ul li a {
-    display: block;
-    color: var(--nav-text-color); /* USE VARIABLE */
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-nav ul li a:hover {
-    background-color: var(--nav-hover-background-color); /* USE VARIABLE */
-    color: var(--nav-text-color); /* Or a slightly different hover text color if defined */
-}
-
-nav ul li a.active {
-    background-color: var(--nav-active-background-color); /* USE VARIABLE */
-    color: var(--primary-accent-text-color); /* USE VARIABLE */
-}
-
-
-
-/* General main content styling update */
-main {
-    padding: 20px;
-    /* Removed text-align: center from main to allow more natural content flow */
-    /* You can add it back or apply to specific elements if needed */
-    max-width: 900px; /* Constrain width for better readability on wide screens */
-    margin: 20px auto; /* Center the main content area */
-    background-color: #fff; /* White background for content area */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-    min-height: calc(100vh - 200px); /* Approximate minimum height to push footer down, adjust 200px based on header/footer height */
-}
-
-/* ... (your existing styles and new nav styles) ... */
-
-/* Button style for links */
-.button {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: var(--button-background-color); /* USE VARIABLE */
-    color: var(--button-text-color); /* USE VARIABLE */
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-right: 10px;
-    transition: background-color 0.3s ease;
-    border: none; /* Remove default border if any */
-}
-
-.button:hover {
-    background-color: var(--button-hover-background-color); /* USE VARIABLE */
-}
-
-.project-card, .experience-item { /* Combined for similar styling */
-    background-color: var(--card-background-color); /* USE VARIABLE */
-    border: 1px solid var(--border-color); /* USE VARIABLE */
-    border-radius: 8px;
-    padding: 20px; /* Increased padding a bit for cards */
-    /* width, box-shadow, margin-bottom, etc. as before */
-    /* ... keep your existing layout styles like flex, gap, width for .project-grid and .project-card ... */
-}
-.project-grid {
+/* --- Layout --- */
+.page-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-.project-card {
-     width: calc(50% - 40px); /* Adjust as needed for responsiveness and gap */
-     box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* This shadow is subtle, might be okay for dark too */
-     margin-bottom: 20px;
-}
-.project-card h3, .experience-item h3 {
-    margin-top: 0;
-    color: var(--heading-color); /* USE VARIABLE */
+    min-height: 100vh;
 }
 
-/* Responsive: one card per row on smaller screens */
-@media (max-width: 768px) {
-    .project-card {
-        width: calc(100% - 40px); /* Full width minus padding */
-    }
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    padding: 20px 0; /* No horizontal padding, handled by items */
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Fixed sidebar */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-right: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Experience Item Styling (optional, very basic) */
-.experience-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
+.content-area {
+    flex-grow: 1;
+    padding: 30px 40px; /* More padding for content */
+    margin-left: var(--sidebar-width); /* Offset by sidebar width */
+    background-color: var(--bg-content);
+    transition: background-color 0.3s ease;
+    overflow-y: auto; /* Allow content to scroll if it overflows */
+}
+
+/* --- Sidebar Specifics --- */
+.sidebar-header {
+    padding: 0 24px 20px 24px; /* Horizontal padding for header items */
+    border-bottom: 1px solid var(--border-primary);
+    margin-bottom: 10px;
+}
+
+.sidebar-title {
+    font-size: 1.4em;
+    font-weight: 500;
+    color: var(--text-sidebar-title);
+    margin: 0;
+}
+
+.sidebar-nav {
+    flex-grow: 1; /* Takes available space */
+    overflow-y: auto; /* Scroll if many nav items */
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px; /* Consistent padding */
+    text-decoration: none;
+    color: var(--text-sidebar-link);
+    font-weight: 400;
+    border-radius: 0 25px 25px 0; /* Rounded right corners like Gemini */
+    margin-right: 16px; /* Space for the rounded corner to not touch sidebar edge */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 18px;
+    width: 20px; /* Ensure icons align */
+    height: 20px;
+    color: var(--icon-color);
+    transition: color 0.2s ease;
+}
+
+.sidebar-nav ul li a span {
+    font-size: 0.95em;
+}
+
+.sidebar-nav ul li a:hover {
+    background-color: var(--bg-theme-button-hover); /* Using theme button hover for subtle effect */
+    color: var(--text-sidebar-link-active);
+}
+.sidebar-nav ul li a:hover i {
+    color: var(--icon-color-active);
+}
+
+.sidebar-nav ul li a.active {
+    background-color: var(--bg-theme-button); /* Active link background */
+    color: var(--text-sidebar-link-active);
+    font-weight: 500;
+}
+
+.sidebar-nav ul li a.active i {
+    color: var(--icon-color-active);
+}
+
+.sidebar-footer {
+    padding: 15px 24px;
+    border-top: 1px solid var(--border-primary);
+}
+
+.theme-button { /* For the button in sidebar footer */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    background-color: transparent; /* Make it look like a nav item */
+    color: var(--text-sidebar-link);
+    border: none;
+    border-radius: 25px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-family: 'Roboto', sans-serif;
+}
+.theme-button:hover {
+    background-color: var(--bg-theme-button-hover);
+    color: var(--text-sidebar-link-active);
+}
+.theme-button i {
+    margin-right: 18px;
+    width: 20px;
+    height: 20px;
+    color: var(--icon-color);
+}
+.theme-button:hover i {
+    color: var(--icon-color-active);
+}
+
+
+/* --- Content Area Specifics --- */
+.content-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-primary);
+}
+.content-header h2 {
+    font-size: 1.8em;
+    font-weight: 500;
+    color: var(--text-headings);
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+.content-section h3 {
+    font-size: 1.4em;
+    font-weight: 500;
+    color: var(--text-headings);
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+.content-section h4 {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--text-headings);
+    margin-bottom: 8px;
+}
+.content-section p {
+    margin-bottom: 1em;
+    color: var(--text-secondary);
+}
+.content-section strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+.content-section ul {
+    list-style-position: outside;
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+.content-section ul li {
+    margin-bottom: 0.5em;
+    color: var(--text-secondary);
+}
+
+/* --- General Components --- */
+.button {
+    display: inline-flex; /* For icon alignment */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    padding: 10px 20px;
+    background-color: var(--bg-button);
+    color: var(--text-on-accent);
+    text-decoration: none;
+    border-radius: 25px; /* Pill shape */
+    border: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.button:hover {
+    background-color: var(--bg-button-hover);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.button.primary-button { /* Already default, but can be explicit */
+    /* styles specific to primary if needed */
+}
+.button.secondary-button {
+    background-color: var(--bg-card);
+    color: var(--text-link);
+    border: 1px solid var(--border-primary);
+}
+.button.secondary-button:hover {
+    background-color: var(--bg-theme-button-hover); /* Subtle hover */
+}
+
+
+.card { /* General card styling for experience, projects */
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: 12px; /* More rounded cards */
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-card);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Project Specific --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 25px;
+}
+
+.project-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.project-icon {
+    margin-right: 12px;
+    color: var(--text-link); /* Use link color for project icons */
+    width: 28px;
+    height: 28px;
+}
+.project-card h3 {
+    margin-bottom: 0; /* Handled by header flex */
+}
+.project-description {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+}
+.project-tech {
+    font-size: 0.9em;
+    color: var(--text-secondary);
     margin-bottom: 20px;
 }
+.project-links .button {
+    margin-right: 10px;
+}
 
-.experience-item h3 {
-    margin-top: 0;
+/* --- CV Specific --- */
+.cv-download-container {
+    margin-bottom: 30px;
+    text-align: left;
+}
+.cv-entry {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border-primary);
+}
+.cv-entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.cv-institution, .cv-dates {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.skill-category {
+    padding: 15px;
+    background-color: var(--bg-card); /* Use card bg for consistency */
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+}
+.skill-category h4 {
+    margin-bottom: 10px;
+}
+
+/* --- Experience Specific --- */
+.experience-item { /* Uses .card styles */
+    /* Additional specific styles if needed */
+}
+.experience-meta {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+
+/* --- Theme Modal --- */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Semi-transparent backdrop */
+    display: flex; /* For centering */
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Start hidden for transition */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.modal-content {
+    background-color: var(--bg-modal);
+    color: var(--text-primary);
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-modal);
+    transform: scale(0.95); /* Start slightly smaller for transition */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-primary);
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: var(--text-headings);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--text-secondary);
+    line-height: 1;
+    padding: 0 5px;
+}
+.close-button:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.theme-option-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background-color: var(--bg-card); /* Use card background */
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.theme-option-button:hover {
+    background-color: var(--bg-theme-button-hover); /* Use a subtle hover */
+    border-color: var(--text-link);
+}
+.theme-option-button.active-theme-choice {
+    border-color: var(--text-link);
+    background-color: var(--bg-theme-button); /* Highlight active choice */
+    font-weight: 500;
+}
+.theme-option-button i {
+    color: var(--icon-color);
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto; /* Auto height for mobile */
+        position: static; /* Static for mobile, content flows below */
+        border-right: none;
+        border-bottom: 1px solid var(--border-primary);
+    }
+    .sidebar-header {
+        /* Could add a hamburger menu toggle here for nav */
+    }
+    .sidebar-nav {
+        /* Initially hide nav on mobile, show with toggle, or make it scroll horizontally */
+        /* For simplicity, let's keep it visible for now */
+    }
+    .sidebar-nav ul li a {
+        justify-content: center; /* Center items if text is hidden */
+        padding: 12px 15px;
+        margin-right: 0;
+        border-radius: 8px; /* Simpler radius for mobile */
+    }
+    .sidebar-nav ul li a span {
+        /* display: none; /* Optionally hide text on very small screens */
+    }
+    .sidebar-footer {
+        /* Adjust footer if needed */
+    }
+    .content-area {
+        margin-left: 0; /* No offset on mobile */
+        padding: 20px;
+    }
+    .project-card {
+        width: 100%; /* Full width cards on mobile */
+    }
+    .modal-content {
+        width: 95%;
+    }
 }

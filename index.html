@@ -1,36 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="system"> <!-- Default to system theme preference -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aris Karalis - Home</title> <link rel="stylesheet" href="style.css">
+    <title>Aris Karalis - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Simple icon library for demo (Feather Icons) -->
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <header>
-        <h1>Aris Karalis</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="experience.html">Experience</a></li>
-                <li><a href="projects.html">Projects</a></li>
-            </ul>
-        </nav>
-        <div class="theme-switcher">
-            Theme:
-            <button data-theme-set="light">Light</button>
-            <button data-theme-set="dark">Dark</button>
-            <button data-theme-set="system">System</button>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Optional: Add a logo or site title here -->
+                <!-- <img src="logo.png" alt="Logo" class="sidebar-logo"> -->
+                <h1 class="sidebar-title">Aris Karalis</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html" class="active" aria-current="page"><i data-feather="home"></i><span>Home</span></a></li>
+                    <li><a href="cv.html"><i data-feather="file-text"></i><span>CV</span></a></li>
+                    <li><a href="experience.html"><i data-feather="briefcase"></i><span>Experience</span></a></li>
+                    <li><a href="projects.html"><i data-feather="code"></i><span>Projects</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="theme-switcher-button" class="theme-button" aria-label="Open theme settings">
+                    <i data-feather="sun" class="theme-icon-light"></i>
+                    <i data-feather="moon" class="theme-icon-dark" style="display:none;"></i>
+                    <span>Theme</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <header class="content-header">
+                <h2>Welcome!</h2>
+            </header>
+            <section class="content-section">
+                <p>Hello! I'm Aris Karalis, an Artificial Intelligence Master's student at the <strong>University of Southampton</strong>, building upon a First Class Honours BSc in Computer Science from the <strong>University of Portsmouth</strong>. I'm passionate about leveraging advanced AI technologies to create innovative and impactful solutions for real-world problems.</p>
+
+                <p>My current focus and expertise include Large Language Models (LLMs), particularly in fine-tuning them and developing sophisticated chatbots with Retrieval Augmented Generation (RAG). A recent project in this area involves creating a RAG system for querying and interacting with a personal library of research papers. You can explore this project further on <a href="https://github.com/ArisKaralis/ResearchPaperRAG" target="_blank" rel="noopener noreferrer">GitHub: ResearchPaperRAG</a>.</p>
+
+                <p>During my MSc in AI at the University of Southampton, I've delved into modules such as:
+                    <ul>
+                        <li>Intelligent Agents (focusing on game theory and auctions)</li>
+                        <li>Foundations of AI</li>
+                        <li>Machine Learning Technologies</li>
+                        <li>Deep Learning Technologies</li>
+                        <li>Data Mining</li>
+                        <li>Algorithmic Game Theory</li>
+                        <li>Natural Language Processing</li>
+                    </ul>
+                These studies have significantly enhanced my understanding and practical skills in cutting-edge AI.
+                </p>
+                <p>This website serves as a portfolio of my journey, skills, and projects. Please explore my CV and project sections to learn more about my work and aspirations in the field of Artificial Intelligence.</p>
+            </section>
+            <!-- Add more sections as needed -->
+        </main>
+    </div>
+
+    <!-- Theme Picker Modal -->
+    <div id="theme-modal" class="modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="theme-modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="theme-modal-title">Choose Theme</h3>
+                <button id="close-modal-button" class="close-button" aria-label="Close theme settings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <button class="theme-option-button" data-theme-set="light">
+                    <i data-feather="sun"></i> Light
+                </button>
+                <button class="theme-option-button" data-theme-set="dark">
+                    <i data-feather="moon"></i> Dark
+                </button>
+                <button class="theme-option-button" data-theme-set="system">
+                    <i data-feather="monitor"></i> System
+                </button>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <h2>Welcome!</h2> <p>This is my personal website. I'm an AI Master's student passionate about [mention your specific AI interests].</p>
-        <p>Explore my CV, work experience, and projects to learn more about my journey and skills.</p>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Aris Karalis</p>
-    </footer>
+    <script src="theme.js" defer></script>
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
 </body>
 </html>
