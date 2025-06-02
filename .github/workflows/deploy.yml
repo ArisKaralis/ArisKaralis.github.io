@@ -1,4 +1,28 @@
-on: # --------------------------------------------------------------------> 2. Trigger Event
+name: Deploy Static HTML Website to GitHub Pages
+
+on:
   push:
     branches:
-      - main  # Or master, if that's your default branch
+      - main # Or your default branch
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository's root directory
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
